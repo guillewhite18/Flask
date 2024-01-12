@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generador de Códigos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer>
+        function showGeneratedCodeAlert() {
+            var generatedCode = '{{ session.get("new_code", "") }}';
+            if (generatedCode) {
+                alert("Código generado con éxito: " + generatedCode + ". Verifícalo en la sección correspondiente.");
+                fetch('/clear_new_code', { method: 'POST' })
+                    .then(response => {
+                        window.location.href = '/';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+
+        function moveToNextField(currentField, nextFieldName) {
+        var currentLength = currentField.value.length;
+        var maxLength = parseInt(currentField.getAttribute('maxlength'));
+        if (currentLength === maxLength) {
+            var nextField = document.getElementsByName(nextFieldName)[0];
+            if (nextField) {
+                nextField.focus();
+            }
+        }
+    }
+    </script>   
+</head>
+
+<body onload="showGeneratedCodeAlert()">
+    <div class="title">
+        <h1>Generar Código</h1>
+    </div>   
+<div class="generate">
+    <form action="/generate_code" method="GET" onsubmit="showGeneratedCodeAlert('{{ new_code }}')">
+        <input type="submit" value="Generar Código">
+    </form>
+</div>
+
+<h2 class="title">Verificar Código</h2>
+<div class="verify">
+    <form action="/check_code" method="POST">
+    <label>Introduce el código:</label>
+    <input type="text" name="group1" maxlength="4" pattern="\d{4}" oninput="moveToNextField(this, 'group2')" required>
+    <input type="text" name="group2" maxlength="4" pattern="\d{4}" oninput="moveToNextField(this, 'group3')" required>
+    <input type="text" name="group3" maxlength="4" pattern="\d{4}" oninput="moveToNextField(this, 'group4')" required>
+    <input type="text" name="group4" maxlength="4" pattern="\d{4}" required>
+    <input type="submit" value="Verificar">
+</form></div>
+
+
+<a href="{{ url_for('get_all_codes') }}" class="title">Ver todos los códigos</a>
+</body>
+</html>

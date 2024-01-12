@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Códigos Generados</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Códigos Generados</h1>
+    <ul>
+    {% for code in codes %}
+        <li>{{ code[1] }}</li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}" class="title">Volver al inicio</a>
+</body>
+</html>

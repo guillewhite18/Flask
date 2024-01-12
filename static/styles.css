@@ -1,0 +1,52 @@
+body {
+    background-image: url("/static/images/blue.jpg");
+    background-size: cover;
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    margin: 0;
+    text-align: center;
+    margin-bottom: -180px;
+    font-size: 1.5em;
+    color: white;
+}
+
+ .generate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    max-width: 300px; 
+    margin: 0 auto; 
+}
+
+.verify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    text-align: center;
+}
+
+.verify form {
+    max-width: 1200px; 
+}
+
+
+.codes {
+    display: flex;
+    margin-left: 250px;
+    align-items: center;
+    width: 100%; 
+    text-align: center;
+
+}
+
